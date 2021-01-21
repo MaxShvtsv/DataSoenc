@@ -1,5 +1,21 @@
 import pandas as pd
 
+# ltv = [1] + [2] + [3] + [4] + [5] =
+# = d * c + d * c * 1_to_2 + d * c * 1_to_2 * 2_to_3 + d * c * 1_to_2 * 2_to_3 * 3_to_4 +
+# + d * c * 1_to_2 * 2_to_3 * 3_to_4 * 4_to_5 = 
+# = d * c * (1 + 1_to_2 + 1_to_2 * 2_to_3 + 1_to_2 * 2_to_3 * 3_to_4 + 1_to_2 * 2_to_3 * 3_to_4 * 4_to_5)
+# (we count ltv for one client)
+# c = 1, as there is one opportunity to take free trial
+# d = price per one perchase
+# 1_to_2, 2_to_3, 3_to_4, 4_to_5 = 1 or 0, 1 - if subscibes, 1 as we count only for one subsciber, so
+# he/she can buy one license per one week;
+# 0 - if he doesn't subscibe.
+# resulting ltv formula = d * p, p = count of purchases. <----
+# [1] = dev proceeds(d) * conversion to trial(c) 
+# [2] = [1] * 1_to_2_purchase
+# [3] = [2] * 2_to_3_purchase
+# [4] = ...
+
 
 def count_lvt(price, conversions, is_have_trial=True):
     if is_have_trial:
